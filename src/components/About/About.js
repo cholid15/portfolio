@@ -21,16 +21,16 @@ const About = () => {
           />
         )}
 
-    <div className='about__intro'>
-      {name && (
-        <h1>
-          Hi, I am <span className='about__name'>{name}.</span>
-        </h1>
-      )}
+        <div className='about__intro'>
+          {name && (
+            <h1>
+              Hi, I am <span className='about__name'>{name}.</span>
+            </h1>
+          )}
 
-      {role && <h2 className='about__role'>A {role}.</h2>}
-      <p className='about__desc'>{description && description}</p>
-      </div>
+          {role && <h2 className='about__role'>A {role}.</h2>}
+          <p className='about__desc'>{description && description}</p>
+        </div>
       </div>
 
       <div className='about__contact center'>
