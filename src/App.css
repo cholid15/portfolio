@@ -1,10 +1,16 @@
+/* --- STRUKTUR APP UTAMA --- */
 .app {
   font-family: 'Poppins', sans-serif;
   line-height: 1.5;
   color: var(--clr-fg);
   background-color: var(--clr-bg);
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
+/* --- THEME VARIANTS --- */
 .light {
   --clr-bg: #fcfcfc;
   --clr-bg-alt: #fff;
@@ -24,6 +30,7 @@
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
+/* --- KONTEN UTAMA --- */
 main {
   max-width: 1100px;
   width: 95%;
@@ -40,11 +47,13 @@ main {
   text-transform: uppercase;
 }
 
+/* --- UTILITAS --- */
 .center {
   display: flex;
   align-items: center;
 }
 
+/* --- LINK --- */
 .link {
   color: var(--clr-primary);
   padding: 0 0 0.3em 0;
@@ -81,6 +90,7 @@ main {
   color: var(--clr-fg);
 }
 
+/* --- BUTTON --- */
 .btn {
   display: block;
   cursor: pointer;
@@ -145,6 +155,7 @@ main {
   transform: translateY(-5px);
 }
 
+/* --- RESPONSIVE --- */
 @media (max-width: 600px) {
   .section {
     margin-top: 4em;

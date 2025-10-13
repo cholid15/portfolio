@@ -1,3 +1,4 @@
+/* --- RESET DASAR --- */
 * {
   padding: 0;
   margin: 0;
@@ -11,10 +12,27 @@
   box-sizing: border-box;
 }
 
+/* --- STRUKTUR DASAR HALAMAN --- */
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--clr-bg);
+  color: var(--clr-fg);
+}
+
+body {
+  overflow-x: hidden;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
+/* --- TYPOGRAPHY --- */
 h1,
 h2,
 h3,
@@ -51,6 +69,7 @@ button {
   cursor: pointer;
 }
 
+/* --- RESPONSIVE --- */
 @media (max-width: 900px) {
   h1 {
     font-size: 2.6rem;

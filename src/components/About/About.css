@@ -1,6 +1,6 @@
 .about {
   flex-direction: column;
-  margin-top: 3em;
+  margin-top: 8em;
 }
 
 .about__name {
@@ -39,19 +39,20 @@
 .about__header {
   display: flex;
   align-items: center;
-  gap: 1.5rem; /* space between picture and text */
+  justify-content: space-between; /* biar agak rapi */
+  gap: 1.5rem;
   margin-bottom: 1.5rem;
+  flex-direction: row-reverse; /* ✅ ini bikin gambar ke kanan */
+}
+
+.about__intro {
+  text-align: left; /* pastikan teks tetap rata kiri */
 }
 
 .about__picture {
   width: 180px;
   height: 180px;
-  border-radius: 70%;   /* round profile */
+  border-radius: 70%;
   object-fit: cover;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-
-.about__intro {
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
