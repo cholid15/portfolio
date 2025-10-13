@@ -10,8 +10,14 @@ import './Navbar.css'
 const Navbar = () => {
   const [{ themeName, toggleTheme }] = useContext(ThemeContext)
   const [showNavList, setShowNavList] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
 
   const toggleNavList = () => setShowNavList(!showNavList)
+
+  const handleNavClick = (section) => {
+    setActiveSection(section)
+    toggleNavList()
+  }
 
   return (
     <nav className='center nav'>
@@ -23,8 +29,10 @@ const Navbar = () => {
           <li className='nav__list-item'>
             <a
               href='#projects'
-              onClick={toggleNavList}
-              className='link link--nav'
+              onClick={() => handleNavClick('projects')}
+              className={`link link--nav ${
+                activeSection === 'projects' ? 'active' : ''
+              }`}
             >
               Projects
             </a>
@@ -35,8 +43,10 @@ const Navbar = () => {
           <li className='nav__list-item'>
             <a
               href='#skills'
-              onClick={toggleNavList}
-              className='link link--nav'
+              onClick={() => handleNavClick('skills')}
+              className={`link link--nav ${
+                activeSection === 'skills' ? 'active' : ''
+              }`}
             >
               Skills
             </a>
@@ -47,8 +57,10 @@ const Navbar = () => {
           <li className='nav__list-item'>
             <a
               href='#contact'
-              onClick={toggleNavList}
-              className='link link--nav'
+              onClick={() => handleNavClick('contact')}
+              className={`link link--nav ${
+                activeSection === 'contact' ? 'active' : ''
+              }`}
             >
               Contact
             </a>

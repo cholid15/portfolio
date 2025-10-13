@@ -18,9 +18,15 @@ const App = () => {
 
       <main>
         <About />
-        <Projects />
-        <Skills />
-        <Contact />
+        <div className='section-spacing'>
+          <Projects />
+        </div>
+        <div className='section-spacing'>
+          <Skills />
+        </div>
+        <div className='section-spacing'>
+          <Contact />
+        </div>
       </main>
 
       <ScrollToTop />

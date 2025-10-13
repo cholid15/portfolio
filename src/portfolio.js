@@ -1,14 +1,15 @@
 const header = {
   // all the properties are optional - can be left empty or deleted
-  homepage: 'https://rjshkhr.github.io/cleanfolio',
-  title: 'JS.',
+  homepage: '#',
+  title: 'Cholid Fajar S.',
 }
 
 const about = {
   // all the properties are optional - can be left empty or deleted
-  name: 'John Smith',
-  role: 'Front End Engineer',
-  picture: 'https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png',
+  name: 'Cholid Fajar S.',
+  role: 'Pul Stek Depeloper',
+  picture:
+    'https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png',
 
   description:
     'Adipisicing sit fugit ullam unde aliquid sequi Facilis soluta facilis perspiciatis corporis nulla aspernatur. Autem eligendi rerum delectus modi quisquam? Illo ut quasi nemo ipsa cumque perspiciatis! Maiores minima consectetur.',
@@ -38,7 +39,8 @@ const projects = [
     stack: ['SASS', 'TypeScript', 'React'],
     sourceCode: 'https://github.com',
     livePreview: 'https://github.com',
-    image: 'https://github.githubassets.com/assets/GitHub-Logo-ee398b662d42.png',
+    image:
+      'https://github.githubassets.com/assets/GitHub-Logo-ee398b662d42.png',
   },
   {
     name: 'Project 3',

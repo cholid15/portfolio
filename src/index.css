@@ -75,3 +75,41 @@ button {
     font-size: 2.6rem;
   }
 }
+
+/* ========================================================= */
+/* ✅ OFFSET UNTUK NAVBAR FIXED SUPAYA SECTION TIDAK KETUTUP */
+/* ========================================================= */
+
+/* --- Variabel tinggi header (atur sesuai ukuran nyata header kamu) --- */
+:root {
+  --header-height-desktop: 5.5rem; /* tinggi header untuk desktop */
+  --header-height-mobile: 6.5rem; /* tinggi header untuk mobile */
+  --header-offset: var(--header-height-desktop);
+}
+
+/* --- Scroll behavior & offset global --- */
+html {
+  scroll-padding-top: var(--header-offset);
+  scroll-behavior: smooth;
+}
+
+/* --- Beri jarak aman di atas setiap section utama --- */
+.section,
+#projects,
+#skills,
+/* #contact, */
+.about {
+  scroll-margin-top: calc(var(--header-offset) + 0.5rem);
+}
+
+/* --- Responsif: header lebih tinggi di layar kecil --- */
+@media (max-width: 900px) {
+  :root {
+    --header-offset: var(--header-height-mobile);
+  }
+}
+
+/* --- Fallback tambahan agar anchor target tetap aman --- */
+:target {
+  scroll-margin-top: calc(var(--header-offset) + 0.5rem);
+}
