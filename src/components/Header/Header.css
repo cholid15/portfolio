@@ -1,31 +1,13 @@
 .header {
-  position: fixed; /* Biar tetap di atas */
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000; /* Supaya di atas elemen lain */
-  display: flex;
-  align-items: center;
+  height: 8em;
+  max-width: 1100px;
+  width: 95%;
+  margin: 0 auto;
   justify-content: space-between;
-  padding: 1.5em 2em;
-  box-sizing: border-box;
-  height: 5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.header h3 {
-  margin: 0;
-}
-
-.center {
-  margin: 0;
-}
-
-/* Responsif */
 @media (max-width: 600px) {
   .header {
-    flex-direction: row;
-    height: 4rem;
-    padding: 1em;
+    height: 6em;
   }
 }

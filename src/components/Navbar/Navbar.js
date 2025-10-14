@@ -26,31 +26,43 @@ const Navbar = () => {
         style={{ display: showNavList ? 'flex' : null }}
         className='nav__list'
       >
+        <li className='nav__list-item'>
+          <Link
+            to='/'
+            onClick={() => handleNavClick('home')}
+            className={`link link--nav ${
+              activeSection === 'home' ? 'active' : ''
+            }`}
+          >
+            Home
+          </Link>
+        </li>
+
         {projects.length ? (
           <li className='nav__list-item'>
-            <a
-              href='/projects'
+            <Link
+              to='/projects'
               onClick={() => handleNavClick('projects')}
               className={`link link--nav ${
                 activeSection === 'projects' ? 'active' : ''
               }`}
             >
               Projects
-            </a>
+            </Link>
           </li>
         ) : null}
 
         {skills.length ? (
           <li className='nav__list-item'>
-            <a
-              href='/skills'
+            <Link
+              to='/skills'
               onClick={() => handleNavClick('skills')}
               className={`link link--nav ${
                 activeSection === 'skills' ? 'active' : ''
               }`}
             >
               Skills
-            </a>
+            </Link>
           </li>
         ) : null}
 

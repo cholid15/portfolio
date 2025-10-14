@@ -94,9 +94,9 @@ html {
 }
 
 /* --- Beri jarak aman di atas setiap section utama --- */
-.section,
+/* .section,
 #projects,
-#skills,
+#skills, */
 /* #contact, */
 .about {
   scroll-margin-top: calc(var(--header-offset) + 0.5rem);

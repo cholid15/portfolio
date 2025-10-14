@@ -4,7 +4,7 @@ import { about } from '../../portfolio'
 import './About.css'
 
 const About = () => {
-  const { name, role, description, resume, social, picture } = about
+  const { name, role, description, resume, social, picture, stats } = about
 
   return (
     <div className='about center'>
@@ -66,6 +66,36 @@ const About = () => {
           </>
         )}
       </div>
+
+      {/* Tambahkan stats section di sini */}
+      {stats && (
+        <div className='about__stats'>
+          <div className='about__stat'>
+            <span className='about__stat-number'>
+              {stats.yearsOfExperience}+
+            </span>
+            <span className='about__stat-label'>Years of Experience</span>
+          </div>
+          <div className='about__stat'>
+            <span className='about__stat-number'>
+              {stats.projectsCompleted}+
+            </span>
+            <span className='about__stat-label'>Projects Completed</span>
+          </div>
+          <div className='about__stat'>
+            <span className='about__stat-number'>
+              {stats.masteredTechnologies}+
+            </span>
+            <span className='about__stat-label'>Mastered Technologies</span>
+          </div>
+          {/* <div className='about__stat'>
+            <span className='about__stat-number'>
+              {stats.clientCollaboration}+
+            </span>
+            <span className='about__stat-label'>Client Collaboration</span>
+          </div> */}
+        </div>
+      )}
     </div>
   )
 }

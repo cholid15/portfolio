@@ -18,6 +18,13 @@ const about = {
     linkedin: 'https://linkedin.com',
     github: 'https://github.com',
   },
+  // Tambahkan stats baru di sini
+  stats: {
+    yearsOfExperience: 2,
+    projectsCompleted: 24,
+    masteredTechnologies: 12,
+    clientCollaboration: 8,
+  },
 }
 
 const projects = [
