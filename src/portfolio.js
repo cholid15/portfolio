@@ -1,22 +1,24 @@
 const header = {
   // all the properties are optional - can be left empty or deleted
   homepage: '#',
-  title: 'Cholid Fajar S.',
+  title: 'Kholid Industries',
 }
 
 const about = {
   // all the properties are optional - can be left empty or deleted
-  name: 'Cholid Fajar S.',
-  role: 'Pul Stek Depeloper',
+  name: 'Cholid Fajar S',
+  role: 'Full Stack Developer',
   picture:
     'https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png',
 
   description:
-    'Adipisicing sit fugit ullam unde aliquid sequi Facilis soluta facilis perspiciatis corporis nulla aspernatur. Autem eligendi rerum delectus modi quisquam? Illo ut quasi nemo ipsa cumque perspiciatis! Maiores minima consectetur.',
-  resume: 'https://example.com',
+    'I am a passionate Full Stack Developer with experience in building web applications using modern technologies. I love to learn and explore new technologies to enhance my skills and deliver high-quality solutions.',
+  // resume: 'https://example.com',
   social: {
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
+    linkedin: 'https://www.linkedin.com/in/cholidfajar/',
+    github: 'https://github.com/cholid15',
+    instagram: 'https://www.instagram.com/khalidfjr_/',
+    wa: 'https://wa.me/6282353361496',
   },
   // Tambahkan stats baru di sini
   stats: {
@@ -24,6 +26,11 @@ const about = {
     projectsCompleted: 24,
     masteredTechnologies: 12,
     clientCollaboration: 8,
+  },
+
+  resume: {
+    id: 'https://yourwebsite.com/resume-id.pdf',
+    en: 'https://yourwebsite.com/resume-en.pdf',
   },
 }
 
@@ -57,28 +64,62 @@ const projects = [
     sourceCode: 'https://github.com',
     livePreview: 'https://github.com',
   },
+  {
+    name: 'Project 4',
+    description:
+      'Amet asperiores et impedit aliquam consectetur? Voluptates sed a nulla ipsa officia et esse aliquam',
+    stack: ['SASS', 'TypeScript', 'React'],
+    sourceCode: 'https://github.com',
+    livePreview: 'https://github.com',
+  },
 ]
 
 const skills = [
-  // skills can be added or removed
-  // if there are no skills, Skills section won't show up
+  // Languages
   'HTML',
-  'CSS',
   'JavaScript',
-  'TypeScript',
-  'React',
-  'Redux',
+  'PHP',
+  'Python',
+
+  // Styling & UI
+  'CSS',
   'SASS',
+  'Bootstrap',
   'Material UI',
+
+  // Databases
+  'MySQL',
+  'PostgreSQL',
+
+  // Frontend Frameworks & Libraries
+  'Vue',
+  'jQuery',
+  'Node.js',
+
+  // Backend Frameworks & Extensions
+  'Laravel',
+  'Laravel Breeze',
+  'Laravel Spatie',
+  'CodeIgniter 3 & 4',
+  'CodeIgniter Shield',
+  'Yii2',
+
+  // API Development
+  'RESTful API',
+  'JSON',
+  'Postman',
+  'Axios',
+
+  // Tools
   'Git',
-  'CI/CD',
-  'Jest',
-  'Enzyme',
+  'GitHub',
 ]
 
 const contact = {
-  // email is optional - if left empty Contact section won't show up
-  email: 'johnsmith@mail.com',
+  email: 'cholidfajar15@gmail.com',
+  phone: '(+62) 823 5336 1496',
+  address: 'Semarang City, Central Java, Indonesia',
+  whatsapp: '(+62) 823 5336 1496', // optional
 }
 
 export { header, about, projects, skills, contact }

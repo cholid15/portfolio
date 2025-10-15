@@ -94,9 +94,6 @@
 .about__stat:nth-child(3) {
   animation-delay: 0.5s;
 }
-.about__stat:nth-child(4) {
-  animation-delay: 0.7s;
-}
 
 @keyframes fadeUp {
   from {
@@ -114,6 +111,7 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* ANIMASI COUNTER UNTUK ANGKA */
 .about__stat-number {
   font-size: 2rem;
   font-weight: 700;
@@ -121,32 +119,23 @@
   margin-bottom: 0.3rem;
   line-height: 1;
   display: block;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: numberPop 1s ease-out forwards;
+  font-variant-numeric: tabular-nums; /* Agar angka tidak berkedip */
 }
 
-.about__stat:nth-child(1) .about__stat-number {
-  animation-delay: 0.3s;
-}
-.about__stat:nth-child(2) .about__stat-number {
-  animation-delay: 0.5s;
-}
-.about__stat:nth-child(3) .about__stat-number {
-  animation-delay: 0.7s;
-}
-.about__stat:nth-child(4) .about__stat-number {
-  animation-delay: 0.9s;
+/* Animasi khusus untuk angka yang sedang berhitung */
+.about__stat-number.counting {
+  animation: pulse 0.5s ease-in-out;
 }
 
-@keyframes numberPop {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.9);
+@keyframes pulse {
+  0% {
+    transform: scale(1);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
@@ -174,9 +163,6 @@
 .about__stat:nth-child(3) .about__stat-label {
   animation-delay: 0.8s;
 }
-.about__stat:nth-child(4) .about__stat-label {
-  animation-delay: 1s;
-}
 
 @keyframes labelFade {
   from {
@@ -199,6 +185,47 @@
   width: 1px;
   height: 40px;
   background-color: var(--clr-bg-alt);
+}
+
+/* Default desktop - tetap dropdown */
+.resume-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.resume-dropdown__menu {
+  display: none;
+  position: absolute;
+  background-color: var(--clr-bg-alt);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  min-width: 180px;
+  z-index: 10;
+  top: 100%;
+  left: 0;
+  margin-top: 0.5rem;
+}
+
+.resume-dropdown__menu a {
+  color: var(--clr-fg);
+  padding: 0.8em 1.2em;
+  text-decoration: none;
+  display: block;
+  transition: background 0.3s;
+  border-radius: 4px;
+  margin: 0.2rem;
+}
+
+.resume-dropdown__menu a:hover {
+  background-color: var(--clr-primary);
+  color: var(--clr-bg);
+}
+
+/* Desktop: hover behavior */
+@media (min-width: 769px) {
+  .resume-dropdown:hover .resume-dropdown__menu {
+    display: block;
+  }
 }
 
 /* ====== RESPONSIVE UNTUK HP / SMARTPHONE ====== */
@@ -253,6 +280,15 @@
     font-size: 0.7rem;
     letter-spacing: 0.6px;
     max-width: 90px;
+  }
+
+  .resume-dropdown__menu--open {
+    display: block !important;
+  }
+
+  /* Tetap pertahankan hover untuk desktop fallback */
+  .resume-dropdown:hover .resume-dropdown__menu {
+    display: none;
   }
 }
 
