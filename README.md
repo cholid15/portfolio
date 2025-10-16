@@ -11,6 +11,8 @@ portfolio/
 │
 ├── backend/ # Server Node.js (Express + MySQL)
 │ ├── server.js
+│ ├── db.js
+│ ├── .env
 │ ├── package.json
 │ └── node_modules/
 │
