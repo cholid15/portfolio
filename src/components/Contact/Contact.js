@@ -17,19 +17,85 @@ const Contact = () => {
     message: '',
   })
 
+  // 🔹 Validasi tiap input sebelum dikirim
+  const validateForm = () => {
+    const { firstname, lastname, email, phone, service, message } = formData
+
+    // Nama depan & belakang wajib huruf minimal 2 karakter
+    if (!firstname.trim() || firstname.length < 2)
+      return 'Please enter a valid firstname (at least 2 characters).'
+    if (!lastname.trim() || lastname.length < 2)
+      return 'Please enter a valid lastname (at least 2 characters).'
+
+    // Email format harus valid
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!email.trim() || !emailRegex.test(email))
+      return 'Please enter a valid email address.'
+
+    // Phone optional tapi kalau diisi harus angka & minimal 8 digit
+    if (phone && !/^\d{8,15}$/.test(phone))
+      return 'Phone number must contain only numbers (8–15 digits).'
+
+    // Service wajib dipilih
+    if (!service.trim()) return 'Please select a service.'
+
+    // Pesan wajib minimal 10 karakter
+    if (!message.trim() || message.length < 10)
+      return 'Message must be at least 10 characters long.'
+
+    // Jika semua lolos, return null
+    return null
+  }
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    // 🔸 Jalankan validasi dulu
+    const error = validateForm()
+    if (error) {
+      Swal.fire({
+        title: 'Invalid input!',
+        text: error,
+        icon: 'warning',
+      })
+      return // hentikan submit kalau error
+    }
+
     try {
+      // 🔹 Tampilkan animasi loading
+      Swal.fire({
+        title: 'Sending...',
+        text: 'Please wait while your message is being sent.',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
+
+      // 🔹 Kirim data ke backend
       const res = await axios.post(
         'http://localhost:5000/api/contact',
         formData
       )
+
+      // 🔹 Tambahkan sedikit delay agar animasi terasa
+      await new Promise((resolve) => setTimeout(resolve, 1500))
+
+      Swal.close()
+
       if (res.data.success) {
-        Swal.fire('Success!', res.data.message, 'success')
+        Swal.fire({
+          title: 'Success!',
+          text: res.data.message,
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false,
+        })
+        // Reset form
         setFormData({
           firstname: '',
           lastname: '',
@@ -40,6 +106,7 @@ const Contact = () => {
         })
       }
     } catch (err) {
+      Swal.close()
       Swal.fire('Error!', 'Something went wrong. Please try again.', 'error')
     }
   }
@@ -116,6 +183,7 @@ const Contact = () => {
               rows='6'
               value={formData.message}
               onChange={handleChange}
+              required
             />
 
             <button type='submit' className='btn-send'>
