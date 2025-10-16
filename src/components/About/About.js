@@ -193,7 +193,7 @@ const About = () => {
             </span>
             <span className='about__stat-label'>Mastered Technologies</span>
           </div>
-          <div className='about__stat'>
+          {/* <div className='about__stat'>
             <span
               className='about__stat-number'
               data-target={stats.masteredTechnologies}
@@ -201,7 +201,7 @@ const About = () => {
               0
             </span>
             <span className='about__stat-label'>Client Collaboration</span>
-          </div>
+          </div> */}
         </div>
       )}
     </div>

@@ -41,14 +41,14 @@ main {
 }
 
 /* Section spacing untuk halaman terpisah */
-.section-spacing {
+/* .section-spacing {
   margin-top: 15rem;
   width: 100%;
-}
+} */
 
-.section {
+/* .section {
   margin-top: 5em;
-}
+} */
 
 .section__title {
   text-align: center;

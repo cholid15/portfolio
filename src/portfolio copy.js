@@ -39,22 +39,23 @@ const projects = [
   // projects can be added an removed
   // if there are no projects, Projects section won't show up
   {
-    name: 'Sistem Buku Tamu YBWSA',
+    name: 'Project 1',
     description:
-      'Sistem Buku Tamu YBWSA - Aplikasi web untuk manajemen tamu yang memungkinkan pencatatan, pelacakan, dan pelaporan kunjungan tamu secara efisien, dilengkapi dengan fitur jadwal sholat dan ayat alquran harian.',
-    stack: ['Laravel 11', 'PHP', 'MySQL', 'Laravel Breeze'],
+      'Amet asperiores et impedit aliquam consectetur? Voluptates sed a nulla ipsa officia et esse aliquam',
+    stack: ['SASS', 'TypeScript', 'React'],
     sourceCode: 'https://github.com',
     livePreview: 'https://github.com',
-    image: 'bukutamu_laravel.jpg',
+    image: 'cleanfolio.png',
   },
   {
-    name: 'Sistem Buku Tamu YBWSA',
+    name: 'Project 2',
     description:
-      'Sistem Buku Tamu YBWSA - versi awal yang dikembangkan menggunakan CodeIgniter 4',
-    stack: ['CodeIgniter 4', 'PHP', 'Mysql', 'CodeIgniter Shield'],
+      'Amet asperiores et impedit aliquam consectetur? Voluptates sed a nulla ipsa officia et esse aliquam',
+    stack: ['SASS', 'TypeScript', 'React'],
     sourceCode: 'https://github.com',
     livePreview: 'https://github.com',
-    image: 'bukutamu_ci.jpg',
+    image:
+      'https://github.githubassets.com/assets/GitHub-Logo-ee398b662d42.png',
   },
   {
     name: 'Project 3',

@@ -23,24 +23,12 @@ const HomePage = () => (
   </>
 )
 
-const ProjectsPage = () => (
-  <div className='section-spacing'>
-    <Projects />
-  </div>
-)
+const ProjectsPage = () => <Projects />
 
-const SkillsPage = () => (
-  <div className='section-spacing'>
-    <Skills />
-  </div>
-)
+const SkillsPage = () => <Skills />
 
 // Komponen untuk halaman contact
-const ContactPage = () => (
-  <div className='section-spacing'>
-    <Contact />
-  </div>
-)
+const ContactPage = () => <Contact />
 
 const App = () => {
   const [{ themeName }] = useContext(ThemeContext)
