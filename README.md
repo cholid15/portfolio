@@ -1,84 +1,47 @@
-# Cleanfolio
+# 💻 Portfolio Full Stack (React + Node.js + MySQL)
 
-Cleanfolio is a portfolio template built with React. However, if you prefer a template built with HTML, CSS, and JavaScript, you can check out [Cleanfolio Minimal](https://github.com/rjshkhr/cleanfolio-minimal).
+Project ini merupakan website portfolio dengan **frontend React** dan **backend Node.js (Express)** yang terhubung ke **database MySQL (phpMyAdmin)**.  
+Frontend dibuat menggunakan **Yarn**, dan backend berfungsi untuk menangani form kontak serta menyimpan data ke database MySQL.
 
-## Preview
+---
 
-[![Imgur](https://imgur.com/FwDMNEM.gif)](https://rjshkhr.github.io/cleanfolio)
+## 🧩 Struktur Folder
 
-[Live Demo](https://rjshkhr.github.io/cleanfolio)
+portfolio/
+│
+├── backend/ # Server Node.js (Express + MySQL)
+│ ├── server.js
+│ ├── package.json
+│ └── node_modules/
+│
+├── src/ # Frontend React
+│ └── components/
+│
+├── public/
+├── package.json # Frontend dependencies
+├── yarn.lock
+└── README.md
 
-## Instructions
+---
 
-### Setup
+## ⚙️ Instalasi & Persiapan
 
-```shell
-git clone https://github.com/rjshkhr/cleanfolio
-cd cleanfolio
+yarn install
+
+yarn add axios sweetalert2
+
+cd backend
+yarn init -y
+yarn add express mysql2 cors dotenv
+
+## jalankan "yarn start" pada 2 terminal
+
+yarn start (front end)
+yarn start (back end)
+
+### 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/username/portfolio.git
+cd portfolio
 ```
-
-If you use [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm), execute:
-
-```shell
-nvm install
-nvm use
-```
-
-Or:
-
-```shell
-fnm install
-fnm use
-```
-
-To install and launch the project, run these commands:
-
-```shell
-yarn
-yarn start
-```
-
-### How to Use
-
-- Open the `public/index.html` file and replace:
-
-`<title>John Smith</title>` with `<title>Your Name</title>`.
-
-- Open the `src/portfolio.js` file and make the necessary changes.
-
-- Optionally, you can add an image or logo for each project in two ways:
-  1. **Local image**
-     - Put your image inside the `public/images/` folder
-     - In `portfolio.js`, just use the file name:
-      ```js
-      image: "cleanfolio.png"
-      ```
-
-  2. **Web image**
-     - If your image is already hosted online, just paste the URL:
-     ```js
-     image: "https://example.com/my-logo.png"
-     ```
-
-
-
-### Deployment
-
-- In the `package.json` file, update:
-
-`"homepage": "https://rjshkhr.github.io/cleanfolio"`
-
-to `"homepage": "https://yourusername.github.io"`.
-
-- Push the changes to your repository.
-
-- To build and deploy, run the following commands:
-
-```shell
-yarn build
-yarn deploy
-```
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)

@@ -7,6 +7,7 @@ import Projects from './components/Projects/Projects'
 import Skills from './components/Skills/Skills'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import Contact from './components/Contact/Contact'
+import Pets from './components/Pets/Pets'
 import Footer from './components/Footer/Footer'
 import './App.css'
 
@@ -58,6 +59,12 @@ const App = () => {
             {/* Route untuk halaman contact */}
             <Route path='/contact'>
               <ContactPage />
+            </Route>
+
+            {/* Add Pets Section */}
+            <Route path='/Pets'>
+              {' '}
+              <Pets />
             </Route>
           </Switch>
         </main>
