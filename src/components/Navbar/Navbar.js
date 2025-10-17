@@ -5,7 +5,7 @@ import WbSunnyRoundedIcon from '@material-ui/icons/WbSunnyRounded'
 import MenuIcon from '@material-ui/icons/Menu'
 import CloseIcon from '@material-ui/icons/Close'
 import { ThemeContext } from '../../contexts/theme'
-import { projects, skills, contact, pets } from '../../portfolio'
+import { projects, skills, contact } from '../../portfolio'
 import './Navbar.css'
 
 const Navbar = () => {
@@ -81,7 +81,7 @@ const Navbar = () => {
         ) : null}
 
         {/* INI SUDAH ADA PETS DI DALAM UL */}
-        {pets.length ? (
+        {/* {pets.length ? (
           <li className='nav__list-item'>
             <Link
               to='/pets'
@@ -93,7 +93,7 @@ const Navbar = () => {
               Pets
             </Link>
           </li>
-        ) : null}
+        ) : null} */}
       </ul>
 
       <button

@@ -8,7 +8,7 @@ const header = {
 const about = {
   // all the properties are optional - can be left empty or deleted
   name: 'Kholid Fajar Supardi',
-  role: 'Full Stack Developer',
+  role: 'a Full Stack Developer',
   picture:
     'https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png',
 

@@ -7,7 +7,7 @@ import Projects from './components/Projects/Projects'
 import Skills from './components/Skills/Skills'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import Contact from './components/Contact/Contact'
-import Pets from './components/Pets/Pets'
+// import Pets from './components/Pets/Pets'
 import Footer from './components/Footer/Footer'
 import './App.css'
 
@@ -62,10 +62,10 @@ const App = () => {
             </Route>
 
             {/* Add Pets Section */}
-            <Route path='/Pets'>
+            {/* <Route path='/Pets'>
               {' '}
               <Pets />
-            </Route>
+            </Route> */}
           </Switch>
         </main>
 

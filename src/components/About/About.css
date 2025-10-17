@@ -11,6 +11,24 @@
   margin-top: 1.2em;
 }
 
+.about__role::after {
+  content: '|';
+  animation: blink 0.8s infinite;
+  margin-left: 4px;
+}
+
+@keyframes blink {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+
 .about__desc {
   font-size: 1rem;
   max-width: 600px;

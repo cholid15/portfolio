@@ -12,30 +12,70 @@ const About = () => {
   const { name, role, description, resume, social, picture, stats } = about
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
+  // 🧩 Typing Effect States
+  const [displayText, setDisplayText] = useState('')
+  const [loopIndex, setLoopIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [typingSpeed, setTypingSpeed] = useState(120)
+
+  // ✨ Kata-kata tambahan setelah role utama
+  const roles = [
+    role,
+    'a dreamer',
+    'wanted to be a gamer but ended up being...',
+    role,
+  ]
+
+  // ⚙️ Efek Typing
+  useEffect(() => {
+    const current = roles[loopIndex % roles.length]
+    const fullText = `${current}.`
+
+    let timer
+    if (isDeleting) {
+      setTypingSpeed(50)
+      timer = setTimeout(() => {
+        setDisplayText((prev) => fullText.substring(0, prev.length - 1))
+      }, typingSpeed)
+    } else {
+      setTypingSpeed(120)
+      timer = setTimeout(() => {
+        setDisplayText((prev) => fullText.substring(0, prev.length + 1))
+      }, typingSpeed)
+    }
+
+    if (!isDeleting && displayText === fullText) {
+      setTimeout(() => setIsDeleting(true), 1200)
+    } else if (isDeleting && displayText === '') {
+      setIsDeleting(false)
+      setLoopIndex((prev) => (prev + 1) % roles.length)
+    }
+
+    return () => clearTimeout(timer)
+  }, [displayText, isDeleting, loopIndex])
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen)
   }
 
-  // Close dropdown when clicking outside
+  // ❌ Tutup dropdown saat klik di luar area
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest('.resume-dropdown')) {
         setIsDropdownOpen(false)
       }
     }
-
     document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
+    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
+  // 🔢 Animasi Counter Stats
   useEffect(() => {
     const counters = document.querySelectorAll('.about__stat-number')
     const speed = 8000
 
     counters.forEach((counterEl) => {
-      const el = counterEl // buat salinan referensi agar tidak dianggap mutate param
+      const el = counterEl
       const animate = () => {
         const targetValue = +el.getAttribute('data-target')
         const currentValue = +el.innerText
@@ -80,7 +120,9 @@ const About = () => {
             </h1>
           )}
 
-          {role && <h2 className='about__role'> {role}.</h2>}
+          {/* 🎯 Efek Typing, tanpa ubah struktur */}
+          {role && <h2 className='about__role'>{displayText}</h2>}
+
           <p className='about__desc'>{description && description}</p>
         </div>
       </div>
@@ -193,15 +235,6 @@ const About = () => {
             </span>
             <span className='about__stat-label'>Mastered Technologies</span>
           </div>
-          {/* <div className='about__stat'>
-            <span
-              className='about__stat-number'
-              data-target={stats.masteredTechnologies}
-            >
-              0
-            </span>
-            <span className='about__stat-label'>Client Collaboration</span>
-          </div> */}
         </div>
       )}
     </div>
