@@ -9,8 +9,9 @@ const about = {
   // all the properties are optional - can be left empty or deleted
   name: 'Kholid Fajar Supardi',
   role: 'a Full Stack Developer',
-  picture:
-    'https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png',
+  // picture:
+  //   'https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png',
+  picture: 'a.jpeg',
 
   description:
     'I am a passionate Full Stack Developer with experience in building web applications using modern technologies. I love to learn and explore new technologies to enhance my skills and deliver high-quality solutions.',

@@ -103,7 +103,7 @@ const About = () => {
                 ? picture
                 : `${
                     typeof process !== 'undefined' ? process.env.PUBLIC_URL : ''
-                  }/images/${picture}`
+                  }/images/biodata/${picture}`
             }
             alt={name}
             className='about__picture'
