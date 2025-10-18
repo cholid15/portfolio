@@ -205,7 +205,7 @@
   background-color: var(--clr-bg-alt);
 }
 
-/* Default desktop - tetap dropdown */
+/* ====== DROPDOWN RESUME (DIPERBAIKI) ====== */
 .resume-dropdown {
   position: relative;
   display: inline-block;
@@ -218,7 +218,7 @@
   border-radius: 8px;
   box-shadow: var(--shadow);
   min-width: 180px;
-  z-index: 10;
+  z-index: 1000; /* Pastikan z-index tinggi */
   top: 100%;
   left: 0;
   margin-top: 0.5rem;
@@ -237,6 +237,10 @@
 .resume-dropdown__menu a:hover {
   background-color: var(--clr-primary);
   color: var(--clr-bg);
+}
+
+.resume-dropdown__menu--open {
+  display: block !important;
 }
 
 /* Desktop: hover behavior */
@@ -259,8 +263,6 @@
   }
 
   .about__picture {
-    /* width: 140px;
-    height: 140px; */
     width: 320px;
     height: 320px;
     border-radius: 20%;
@@ -303,8 +305,11 @@
     max-width: 90px;
   }
 
+  /* Untuk mobile - pastikan tetap terbuka */
   .resume-dropdown__menu--open {
     display: block !important;
+    position: absolute;
+    z-index: 1000;
   }
 
   /* Tetap pertahankan hover untuk desktop fallback */
@@ -349,8 +354,6 @@
   }
 
   .about__picture {
-    /* width: 140px;
-    height: 140px; */
     width: 250px;
     height: 250px;
     border-radius: 20%;
@@ -380,8 +383,6 @@
   }
 
   .about__picture {
-    /* width: 140px;
-    height: 140px; */
     width: 200px;
     height: 200px;
     border-radius: 20%;

@@ -54,19 +54,27 @@ const About = () => {
     return () => clearTimeout(timer)
   }, [displayText, isDeleting, loopIndex])
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (event) => {
+    // Hentikan propagasi event agar tidak langsung memicu handleClickOutside
+    if (event) {
+      event.stopPropagation()
+    }
     setIsDropdownOpen(!isDropdownOpen)
   }
 
-  // ❌ Tutup dropdown saat klik di luar area
+  // ❌ Tutup dropdown saat klik di luar area (DIPERBAIKI)
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Cek apakah klik dilakukan di luar dropdown resume
       if (!event.target.closest('.resume-dropdown')) {
         setIsDropdownOpen(false)
       }
     }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+
+    // Gunakan event 'click' instead of 'mousedown' untuk behavior yang lebih baik
+    document.addEventListener('click', handleClickOutside)
+
+    return () => document.removeEventListener('click', handleClickOutside)
   }, [])
 
   // 🔢 Animasi Counter Stats

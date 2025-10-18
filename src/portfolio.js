@@ -31,8 +31,8 @@ const about = {
   },
 
   resume: {
-    id: 'https://yourwebsite.com/resume-id.pdf',
-    en: 'https://yourwebsite.com/resume-en.pdf',
+    id: 'https://drive.google.com/file/d/1BYy832wjW6wiVWGjAS5jEI6WZuHQwBl4/view?usp=sharing',
+    en: 'https://drive.google.com/file/d/1TmAsiB_7mbEtVE3hfG18QExWP9pivy_N/view?usp=drive_link',
   },
 }
 
