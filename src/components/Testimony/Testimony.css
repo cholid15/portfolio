@@ -1,0 +1,95 @@
+.testimony {
+  background: #1c1f2a;
+  padding: 3rem 1rem;
+  color: #ffffff;
+  text-align: center;
+  max-width: 700px;
+  margin: 2rem auto;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+.testimony__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #cdcdff;
+}
+
+.testimony__subtitle {
+  font-size: 1rem;
+  color: #aaaaaa;
+  margin-bottom: 2rem;
+}
+
+.testimony__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  text-align: left;
+}
+
+.testimony__group label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.testimony__group input,
+.testimony__group textarea,
+.testimony__group select {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background-color: #2a2f44;
+  color: #fff;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+.testimony__group input:focus,
+.testimony__group textarea:focus,
+.testimony__group select:focus {
+  border-color: #cdcdff;
+  outline: none;
+}
+
+.testimony__btn {
+  background-color: #cdcdff;
+  color: #23283e;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  padding: 0.9rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.testimony__btn:hover {
+  background-color: #b5b5ff;
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+
+.success {
+  margin-top: 1rem;
+  color: #80ffb5;
+  font-weight: 600;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

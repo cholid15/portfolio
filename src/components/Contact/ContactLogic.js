@@ -1,29 +1,32 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
-// ⚙️ KONFIGURASI TELEGRAM BOT - AMAN DARI .env
-const TELEGRAM_BOT_TOKEN = process.env.REACT_APP_TELEGRAM_BOT_TOKEN
-const TELEGRAM_CHAT_ID = process.env.REACT_APP_TELEGRAM_CHAT_ID
-
-// DEBUG: Cek apakah env terbaca
-
+// 🔍 Validasi form
 export const validateForm = (formData) => {
   const { firstname, lastname, email, phone, service, message } = formData
+
   if (!firstname.trim() || firstname.length < 2)
     return 'Please enter a valid firstname (at least 2 characters).'
+
   if (!lastname.trim() || lastname.length < 2)
     return 'Please enter a valid lastname (at least 2 characters).'
+
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!email.trim() || !emailRegex.test(email))
     return 'Please enter a valid email address.'
+
   if (phone && !/^\d{8,15}$/.test(phone))
     return 'Phone number must contain only numbers (8–15 digits).'
+
   if (!service || !service.toString().trim()) return 'Please select a service.'
+
   if (!message.trim() || message.length < 10)
     return 'Message must be at least 10 characters long.'
+
   return null
 }
 
+// 🚀 Fungsi untuk submit form
 export const handleSubmitLogic = async (formData, setFormData, validateFn) => {
   const error = validateFn(formData)
   if (error) {
@@ -40,85 +43,64 @@ export const handleSubmitLogic = async (formData, setFormData, validateFn) => {
       title: 'Sending...',
       text: 'Please wait while your message is being sent.',
       allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading()
+      didOpen: () => Swal.showLoading(),
+    })
+
+    // 📨 Kirim ke backend PHP
+    // Gunakan IP atau domain backend PHP (bukan "localhost" dari React)
+    const backendURL =
+      'http://localhost/portfolio/backend_php/contact_submit.php'
+
+    const response = await axios.post(backendURL, formData, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
+      withCredentials: false, // pastikan tidak kirim cookie cross-origin
+      timeout: 10000,
     })
 
-    console.log('📤 Sending contact request with payload:', formData)
+    if (response?.data?.status === 'success') {
+      Swal.close()
+      Swal.fire({
+        title: 'Success!',
+        text: 'Your message has been sent successfully!',
+        icon: 'success',
+        timer: 3000,
+        showConfirmButton: false,
+      })
 
-    // 📅 Format waktu Indonesia
-    const currentTime = new Date().toLocaleString('id-ID', {
-      timeZone: 'Asia/Jakarta',
-      dateStyle: 'full',
-      timeStyle: 'medium',
-    })
-
-    // 📱 Format pesan untuk Telegram
-    const telegramMessage = `
-🎉 <b>NEW CONTACT MESSAGE!</b>
-
-━━━━━━━━━━━━━━━━━
-👤 <b>Name:</b> ${formData.firstname} ${formData.lastname}
-📧 <b>Email:</b> <code>${formData.email}</code>
-📱 <b>Phone:</b> ${formData.phone || 'Not provided'}
-🛠️ <b>Service:</b> ${formData.service}
-🕐 <b>Time:</b> ${currentTime}
-
-━━━━━━━━━━━━━━━━━
-💬 <b>Message:</b>
-<i>${formData.message}</i>
-
-━━━━━━━━━━━━━━━━━
-📍 <i>Sent from Portfolio Website</i>
-    `.trim()
-
-    // 📤 Kirim ke Telegram
-    const telegramResponse = await axios.post(
-      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-      {
-        chat_id: TELEGRAM_CHAT_ID,
-        text: telegramMessage,
-        parse_mode: 'HTML',
-      },
-      {
-        timeout: 10000,
-      }
-    )
-
-    console.log('✅ Telegram notification sent:', telegramResponse.data)
-
-    await new Promise((resolve) => setTimeout(resolve, 800))
-
-    Swal.close()
-
-    Swal.fire({
-      title: 'Success!',
-      text: 'Your message has been sent successfully! I will contact you soon.',
-      icon: 'success',
-      timer: 3000,
-      showConfirmButton: false,
-    })
-
-    setFormData({
-      firstname: '',
-      lastname: '',
-      email: '',
-      phone: '',
-      service: '',
-      message: '',
-    })
+      // Reset form
+      setFormData({
+        firstname: '',
+        lastname: '',
+        email: '',
+        phone: '',
+        service: '',
+        message: '',
+      })
+    } else {
+      throw new Error(response?.data?.message || 'Unknown server error')
+    }
   } catch (err) {
     Swal.close()
-    console.error('❌ Error sending message:')
-    console.error('Status:', err.response?.status)
-    console.error('Data:', err.response?.data)
-    console.error('Message:', err.message)
 
-    Swal.fire(
-      'Error!',
-      'Failed to send message. Please try again or contact me directly.',
-      'error'
-    )
+    // Tampilkan pesan error yang lebih jelas di console
+    console.error('❌ PHP backend error:', err)
+
+    // Jika error karena CORS, tampilkan penjelasan
+    if (err.message.includes('Network Error')) {
+      Swal.fire({
+        title: 'Network Error!',
+        text: 'Failed to reach the backend. Please ensure your PHP server is running and CORS is enabled.',
+        icon: 'error',
+      })
+    } else {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Failed to send message. Please try again later.',
+        icon: 'error',
+      })
+    }
   }
 }
