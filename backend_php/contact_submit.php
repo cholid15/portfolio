@@ -60,9 +60,9 @@ function write_log($msg)
     @file_put_contents($log_file, "$timestamp $msg" . PHP_EOL, FILE_APPEND);
 }
 
-write_log("========== NEW REQUEST ==========");
-write_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
-write_log("Request URI: " . $_SERVER['REQUEST_URI']);
+// write_log("========== NEW REQUEST ==========");
+// write_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
+// write_log("Request URI: " . $_SERVER['REQUEST_URI']);
 
 // =========================
 // HELPER: Format Indonesian Date/Time
@@ -122,7 +122,7 @@ function load_template($file, $data)
     }
 
     $template = file_get_contents($file);
-    write_log("✅ Template loaded: $file");
+    // write_log("✅ Template loaded: $file");
 
     // Replace placeholders
     foreach ($data as $key => $value) {
@@ -150,10 +150,10 @@ foreach ($possibleEnvPaths as $path) {
             $dotenv = Dotenv::createImmutable($path);
             $dotenv->safeLoad();
             $envLoaded = true;
-            write_log("✅ Dotenv loaded successfully");
+            // write_log("✅ Dotenv loaded successfully");
             break;
         } catch (Exception $e) {
-            write_log("❌ Dotenv load failed: " . $e->getMessage());
+            // write_log("❌ Dotenv load failed: " . $e->getMessage());
         }
     }
 }
@@ -174,11 +174,11 @@ $telegram_chat_id = $_ENV['TELEGRAM_CHAT_ID'] ?? $_SERVER['TELEGRAM_CHAT_ID'] ??
 $email_user = $_ENV['EMAIL_USER'] ?? $_SERVER['EMAIL_USER'] ?? '';
 $email_pass = $_ENV['EMAIL_PASS'] ?? $_SERVER['EMAIL_PASS'] ?? '';
 
-write_log("🔧 CONFIG CHECK:");
-write_log("   DB_HOST=" . $host);
-write_log("   TELEGRAM_BOT_TOKEN=" . ($telegram_token ? 'SET (***' . substr($telegram_token, -4) . ')' : 'NOT SET'));
-write_log("   TELEGRAM_CHAT_ID=" . ($telegram_chat_id ?: 'NOT SET'));
-write_log("   EMAIL_USER=" . ($email_user ?: 'NOT SET'));
+// write_log("🔧 CONFIG CHECK:");
+// write_log("   DB_HOST=" . $host);
+// write_log("   TELEGRAM_BOT_TOKEN=" . ($telegram_token ? 'SET (***' . substr($telegram_token, -4) . ')' : 'NOT SET'));
+// write_log("   TELEGRAM_CHAT_ID=" . ($telegram_chat_id ?: 'NOT SET'));
+// write_log("   EMAIL_USER=" . ($email_user ?: 'NOT SET'));
 
 // =========================
 // DB CONNECTION
@@ -194,17 +194,17 @@ if ($conn->connect_error) {
     exit;
 }
 $conn->set_charset("utf8mb4");
-write_log("✅ Database connected successfully");
+// write_log("✅ Database connected successfully");
 
 // =========================
 // READ JSON INPUT
 // =========================
 $raw = file_get_contents("php://input");
-write_log("📥 Raw input: " . substr($raw, 0, 200));
+// write_log("📥 Raw input: " . substr($raw, 0, 200));
 
 $data = json_decode($raw, true);
 if (json_last_error() !== JSON_ERROR_NONE) {
-    write_log("❌ JSON decode error: " . json_last_error_msg());
+    // write_log("❌ JSON decode error: " . json_last_error_msg());
     http_response_code(400);
     echo json_encode([
         "status" => "error",
@@ -214,7 +214,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 }
 
 if (!$data || !is_array($data)) {
-    write_log("⚠️ Invalid data structure");
+    // write_log("⚠️ Invalid data structure");
     http_response_code(400);
     echo json_encode([
         "status" => "error",
@@ -235,7 +235,7 @@ $message = trim($data["message"] ?? '');
 
 // Basic validation
 if (empty($firstname) || empty($lastname) || empty($email) || empty($service) || empty($message)) {
-    write_log("⚠️ Missing required fields");
+    // write_log("⚠️ Missing required fields");
     http_response_code(400);
     echo json_encode([
         "status" => "error",
@@ -253,7 +253,7 @@ $service_db = $conn->real_escape_string($service);
 $message_db = $conn->real_escape_string($message);
 $time = date("Y-m-d H:i:s");
 
-write_log("📩 New message from: $firstname $lastname <$email>");
+// write_log("📩 New message from: $firstname $lastname <$email>");
 
 // =========================
 // SAVE TO DB
@@ -263,9 +263,9 @@ $sql = "INSERT INTO contacts (firstname, lastname, email, phone, service, messag
 
 if ($conn->query($sql)) {
     $insert_id = $conn->insert_id;
-    write_log("💾 Data saved successfully (ID: $insert_id)");
+    // write_log("💾 Data saved successfully (ID: $insert_id)");
 } else {
-    write_log("❌ DB Insert error: " . $conn->error);
+    // write_log("❌ DB Insert error: " . $conn->error);
     // Don't fail the entire request if DB fails
 }
 
@@ -273,7 +273,7 @@ if ($conn->query($sql)) {
 // FORMAT INDONESIAN DATE
 // =========================
 $time_indonesian = format_indonesian_datetime($time);
-write_log("🕐 Formatted time: $time_indonesian");
+// write_log("🕐 Formatted time: $time_indonesian");
 
 // =========================
 // PREPARE DATA FOR TEMPLATES
@@ -294,7 +294,7 @@ $template_data = [
 $telegram_sent = false;
 if ($telegram_token && $telegram_chat_id) {
     $template_file = __DIR__ . '/templates/telegram_template.txt';
-    write_log("📱 Attempting to send Telegram from template: $template_file");
+    // write_log("📱 Attempting to send Telegram from template: $template_file");
 
     $telegram_text = load_template($template_file, $template_data);
 
@@ -319,16 +319,16 @@ if ($telegram_token && $telegram_chat_id) {
         curl_close($ch);
 
         if ($http_code == 200) {
-            write_log("✅ Telegram message sent successfully");
+            // write_log("✅ Telegram message sent successfully");
             $telegram_sent = true;
         } else {
-            write_log("❌ Telegram send failed. HTTP: $http_code | Error: $curl_error | Response: " . substr($result, 0, 200));
+            // write_log("❌ Telegram send failed. HTTP: $http_code | Error: $curl_error | Response: " . substr($result, 0, 200));
         }
     } else {
-        write_log("❌ Failed to load Telegram template");
+        // write_log("❌ Failed to load Telegram template");
     }
 } else {
-    write_log("⚠️ Telegram not configured (Token or Chat ID missing)");
+    // write_log("⚠️ Telegram not configured (Token or Chat ID missing)");
 }
 
 // =========================
@@ -337,7 +337,7 @@ if ($telegram_token && $telegram_chat_id) {
 $email_sent = false;
 if ($email_user && $email_pass) {
     $template_file = __DIR__ . '/templates/email_template.html';
-    write_log("📧 Attempting to send Email from template: $template_file");
+    // write_log("📧 Attempting to send Email from template: $template_file");
 
     $email_html = load_template($template_file, [
         'firstname' => htmlspecialchars($firstname, ENT_QUOTES, 'UTF-8'),
@@ -397,23 +397,23 @@ Status: Saved to Database
             ";
 
             $mail->send();
-            write_log("✅ Email sent successfully");
+            // write_log("✅ Email sent successfully");
             $email_sent = true;
         } catch (Exception $e) {
-            write_log("❌ Email send failed: " . $e->getMessage());
+            // write_log("❌ Email send failed: " . $e->getMessage());
         }
     } else {
-        write_log("❌ Failed to load Email template");
+        // write_log("❌ Failed to load Email template");
     }
 } else {
-    write_log("⚠️ Email not configured (Username or Password missing)");
+    // write_log("⚠️ Email not configured (Username or Password missing)");
 }
 
 // =========================
 // RESPONSE
 // =========================
-write_log("✅ Request processing complete");
-write_log("========================================");
+// write_log("✅ Request processing complete");
+// write_log("========================================");
 
 $response = [
     "status" => "success",

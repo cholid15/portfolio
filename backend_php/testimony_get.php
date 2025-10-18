@@ -85,7 +85,7 @@ while ($row = $result->fetch_assoc()) {
     $rows[] = $row;
 }
 
-logMessage("✅ Found " . count($rows) . " testimonies");
+// logMessage("✅ Found " . count($rows) . " testimonies");
 
 // -------------------------
 // Output JSON

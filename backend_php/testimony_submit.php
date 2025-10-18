@@ -47,9 +47,9 @@ function respond($code, $payload)
 $autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($autoload)) {
     require_once $autoload;
-    write_log("vendor/autoload.php loaded.");
+    // write_log("vendor/autoload.php loaded.");
 } else {
-    write_log("⚠️ vendor/autoload.php not found. Composer dependencies may be missing.");
+    // write_log("⚠️ vendor/autoload.php not found. Composer dependencies may be missing.");
 }
 
 // Jika Dotenv tersedia, muat .env
@@ -57,9 +57,9 @@ if (class_exists('\\Dotenv\\Dotenv')) {
     try {
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
         $dotenv->safeLoad();
-        write_log(".env loaded successfully using Dotenv.");
+        // write_log(".env loaded successfully using Dotenv.");
     } catch (Exception $e) {
-        write_log("⚠️ Dotenv error: " . $e->getMessage());
+        // write_log("⚠️ Dotenv error: " . $e->getMessage());
     }
 } else {
     // Jika tidak ada Dotenv, coba parse manual file .env di root
@@ -76,9 +76,9 @@ if (class_exists('\\Dotenv\\Dotenv')) {
                 $_SERVER[$key] = $value;
             }
         }
-        write_log(".env parsed manually (Dotenv missing).");
+        // write_log(".env parsed manually (Dotenv missing).");
     } else {
-        write_log("⚠️ .env file not found at expected path.");
+        // write_log("⚠️ .env file not found at expected path.");
     }
 }
 
@@ -99,14 +99,14 @@ $DB_NAME = env_var('DB_NAME', 'portfolio_db');
 $TELEGRAM_BOT_TOKEN = env_var('TELEGRAM_BOT_TOKEN', '');
 $TELEGRAM_CHAT_ID   = env_var('TELEGRAM_CHAT_ID', '');
 
-write_log("DB config: host=$DB_HOST user=$DB_USER db=$DB_NAME");
+// write_log("DB config: host=$DB_HOST user=$DB_USER db=$DB_NAME");
 
 // ----------------------
 // Koneksi Database
 // ----------------------
 $conn = @new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 if ($conn->connect_error) {
-    write_log("❌ DB connection error: " . $conn->connect_error);
+    // write_log("❌ DB connection error: " . $conn->connect_error);
     respond(500, ['success' => false, 'message' => 'Database connection failed']);
 }
 
@@ -117,7 +117,7 @@ $raw = file_get_contents('php://input');
 $input = json_decode($raw, true);
 
 if (!is_array($input)) {
-    write_log("❌ Invalid JSON payload: " . substr($raw, 0, 300));
+    // write_log("❌ Invalid JSON payload: " . substr($raw, 0, 300));
     respond(400, ['success' => false, 'message' => 'Invalid JSON payload']);
 }
 
@@ -131,11 +131,11 @@ $message = trim($input['message'] ?? '');
 // Validasi
 // ----------------------
 if ($name === '' || $email === '' || $message === '') {
-    write_log("❌ Missing fields: name='$name', email='$email', msg-len=" . strlen($message));
+    // write_log("❌ Missing fields: name='$name', email='$email', msg-len=" . strlen($message));
     respond(400, ['success' => false, 'message' => 'Please fill all required fields']);
 }
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    write_log("❌ Invalid email: $email");
+    // write_log("❌ Invalid email: $email");   
     respond(400, ['success' => false, 'message' => 'Invalid email format']);
 }
 
@@ -144,19 +144,19 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 // ----------------------
 $stmt = $conn->prepare("INSERT INTO testimonies (name, email, company, rating, message) VALUES (?, ?, ?, ?, ?)");
 if (!$stmt) {
-    write_log("❌ SQL prepare failed: " . $conn->error);
+    // write_log("❌ SQL prepare failed: " . $conn->error);
     respond(500, ['success' => false, 'message' => 'Server error (prepare failed)']);
 }
 
 $stmt->bind_param("sssis", $name, $email, $company, $rating, $message);
 if (!$stmt->execute()) {
-    write_log("❌ SQL execute failed: " . $stmt->error);
+    // write_log("❌ SQL execute failed: " . $stmt->error);
     $stmt->close();
     respond(500, ['success' => false, 'message' => 'Failed to save testimony']);
 }
 
 $insertId = $conn->insert_id;
-write_log("✅ Inserted testimony id=$insertId name=$name email=$email rating=$rating");
+// write_log("✅ Inserted testimony id=$insertId name=$name email=$email rating=$rating");
 
 // ----------------------
 // Kirim Telegram
@@ -185,12 +185,12 @@ if (!empty($TELEGRAM_BOT_TOKEN) && !empty($TELEGRAM_CHAT_ID)) {
     curl_close($ch);
 
     if ($response === false || $curlErr) {
-        write_log("⚠️ Telegram send failed: $curlErr");
+        // write_log("⚠️ Telegram send failed: $curlErr");
     } else {
-        write_log("📨 Telegram sent: " . substr($response, 0, 200));
+        // write_log("📨 Telegram sent: " . substr($response, 0, 200));
     }
 } else {
-    write_log("ℹ️ Telegram not configured — skipped send.");
+    // write_log("ℹ️ Telegram not configured — skipped send.");
 }
 
 // ----------------------
