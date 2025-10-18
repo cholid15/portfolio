@@ -47,3 +47,11 @@ yarn start (back end)
 git clone https://github.com/username/portfolio.git
 cd portfolio
 ```
+
+### halaman input testi
+
+http://localhost:3000/testi
+
+### halaman view testi
+
+http://localhost:3000/testiView

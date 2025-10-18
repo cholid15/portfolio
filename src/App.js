@@ -8,6 +8,7 @@ import Skills from './components/Skills/Skills'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import Contact from './components/Contact/Contact'
 import Testi from './components/Testimony/Testimony'
+import TestiView from './components/Testimony/TestimonyView'
 
 // import Pets from './components/Pets/Pets'
 import Footer from './components/Footer/Footer'
@@ -73,6 +74,12 @@ const App = () => {
             <Route path='/Testi'>
               {' '}
               <Testi />
+            </Route>
+
+            {/* Add Pets Section */}
+            <Route path='/Testiview'>
+              {' '}
+              <TestiView />
             </Route>
           </Switch>
         </main>
