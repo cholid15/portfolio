@@ -10,7 +10,7 @@ import Contact from './components/Contact/Contact'
 import Testi from './components/Testimony/Testimony'
 import TestiView from './components/Testimony/TestimonyView'
 
-// import Pets from './components/Pets/Pets'
+import Pets from './components/Pets/Pets'
 import Footer from './components/Footer/Footer'
 import './App.css'
 
@@ -65,10 +65,10 @@ const App = () => {
             </Route>
 
             {/* Add Pets Section */}
-            {/* <Route path='/Pets'>
+            <Route path='/Pets'>
               {' '}
               <Pets />
-            </Route> */}
+            </Route>
 
             {/* Add Pets Section */}
             <Route path='/Testi'>

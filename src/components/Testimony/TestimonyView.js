@@ -1,14 +1,27 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 import './TestimonyView.css'
 
 const TestimonyView = () => {
   const [testimonies, setTestimonies] = useState([])
   const [loading, setLoading] = useState(true)
-  const [activeIndex, setActiveIndex] = useState(0)
-  const containerRef = useRef(null)
-  const autoRef = useRef(null)
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 1200
+  )
 
-  // Fetch testimonies dari backend
+  // Deteksi window width saat mount dan resize
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Fetch testimonies
   useEffect(() => {
     let mounted = true
     const fetchData = async () => {
@@ -21,34 +34,6 @@ const TestimonyView = () => {
         setTestimonies(Array.isArray(data) ? data : [])
       } catch (err) {
         console.error('Error fetching testimonies:', err)
-        if (!mounted) return
-        // fallback demo
-        setTestimonies([
-          {
-            id: 1,
-            name: 'Ahmad Fauzi',
-            email: 'ahmad@example.com',
-            message: 'Website-nya cepat dan tampilannya keren banget!',
-            rating: 5,
-            created_at: new Date().toISOString(),
-          },
-          {
-            id: 2,
-            name: 'Siti Rahma',
-            email: 'siti@example.com',
-            message: 'Desainnya clean dan responsif di semua device.',
-            rating: 4,
-            created_at: new Date().toISOString(),
-          },
-          {
-            id: 3,
-            name: 'Rizky Putra',
-            email: 'rizky@example.com',
-            message: 'Fast response dan hasil project sangat memuaskan!',
-            rating: 5,
-            created_at: new Date().toISOString(),
-          },
-        ])
       } finally {
         if (mounted) setLoading(false)
       }
@@ -59,116 +44,64 @@ const TestimonyView = () => {
     }
   }, [])
 
-  // helper: slides-per-view
-  const getSlidesPerView = () => {
-    if (typeof window === 'undefined') return 1
-    const w = window.innerWidth
-    if (w >= 1024) return 3
-    if (w >= 768) return 2
-    return 1
+  // Tentukan slidesToShow berdasarkan window width
+  const getInitialSlidesToShow = () => {
+    if (windowWidth <= 480) return 1
+    if (windowWidth <= 640) return 1
+    if (windowWidth <= 768) return 2
+    if (windowWidth <= 1024) return 2
+    return 3
   }
 
-  // Scroll ke index (dipakai oleh tombol/dots)
-  const scrollToIndex = (index) => {
-    const container = containerRef.current
-    if (!container) return
-    const slides = container.querySelectorAll('.testimony-card')
-    if (!slides.length) return
-    const spv = getSlidesPerView()
-    const maxIndex = Math.max(0, testimonies.length - spv)
-    const clamped = Math.max(0, Math.min(index, maxIndex))
-    const target = slides[clamped]
-    if (target) {
-      container.scrollTo({
-        left: target.offsetLeft,
-        behavior: 'smooth',
-      })
-      setActiveIndex(clamped)
-    }
+  // ⚙️ Konfigurasi Slider dengan Responsive Settings
+  const sliderSettings = {
+    dots: testimonies.length > 1,
+    infinite: testimonies.length > 1,
+    speed: 600,
+    slidesToShow: getInitialSlidesToShow(),
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    pauseOnHover: true,
+    // arrows: true,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   }
-
-  const handlePrev = () => scrollToIndex(activeIndex - 1)
-  const handleNext = () => scrollToIndex(activeIndex + 1)
-
-  // Update activeIndex saat scroll manual (dependensi: testimonies)
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) {
-      // selalu kembalikan fungsi cleanup untuk konsistensi lint
-      return () => {}
-    }
-
-    const onScroll = () => {
-      const slides = container.querySelectorAll('.testimony-card')
-      if (!slides.length) return
-      let closest = 0
-      let minDiff = Infinity
-      slides.forEach((s, i) => {
-        const diff = Math.abs(s.offsetLeft - container.scrollLeft)
-        if (diff < minDiff) {
-          minDiff = diff
-          closest = i
-        }
-      })
-      setActiveIndex(closest)
-    }
-
-    container.addEventListener('scroll', onScroll, { passive: true })
-    // cleanup
-    return () => {
-      container.removeEventListener('scroll', onScroll)
-    }
-  }, [testimonies])
-
-  // Autoplay (selalu mengembalikan cleanup function)
-  useEffect(() => {
-    if (!testimonies.length) {
-      return () => {}
-    }
-
-    const tick = () => {
-      const container = containerRef.current
-      if (!container) return
-      const spv = getSlidesPerView()
-      const slides = container.querySelectorAll('.testimony-card')
-      if (!slides.length) return
-      const maxIndex = Math.max(0, slides.length - spv)
-      const next = activeIndex >= maxIndex ? 0 : activeIndex + 1
-      const target = slides[next]
-      if (target) {
-        container.scrollTo({ left: target.offsetLeft, behavior: 'smooth' })
-        setActiveIndex(next)
-      }
-    }
-
-    autoRef.current = setInterval(tick, 4000)
-    return () => {
-      clearInterval(autoRef.current)
-    }
-  }, [activeIndex, testimonies])
-
-  // Re-align on resize (selalu mengembalikan cleanup)
-  useEffect(() => {
-    const onResize = () => {
-      const container = containerRef.current
-      if (!container) return
-      const slides = container.querySelectorAll('.testimony-card')
-      if (!slides.length) return
-      const idx = Math.min(
-        activeIndex,
-        Math.max(0, slides.length - getSlidesPerView())
-      )
-      const target = slides[idx]
-      if (target) {
-        container.scrollTo({ left: target.offsetLeft, behavior: 'smooth' })
-        setActiveIndex(idx)
-      }
-    }
-    window.addEventListener('resize', onResize)
-    return () => {
-      window.removeEventListener('resize', onResize)
-    }
-  }, [activeIndex, testimonies])
 
   if (loading) {
     return (
@@ -184,22 +117,32 @@ const TestimonyView = () => {
 
   return (
     <section className='section testimony-view section-spacing' id='testimony'>
-      <h2 className='section__title'>What People Say</h2>
+      <h2 className='section__title'>
+        What People Say{' '}
+        <span className='testimony__count'>
+          ({testimonies.length} testimonial{testimonies.length > 1 ? 's' : ''})
+        </span>
+      </h2>
 
-      <div className='testimony-carousel-wrap'>
-        <button
-          type='button'
-          className='carousel-btn carousel-btn--prev'
-          onClick={handlePrev}
-          aria-label='Previous testimony'
+      <div className='testimony-carousel'>
+        <Slider
+          dots={sliderSettings.dots}
+          infinite={sliderSettings.infinite}
+          speed={sliderSettings.speed}
+          slidesToShow={sliderSettings.slidesToShow}
+          slidesToScroll={sliderSettings.slidesToScroll}
+          autoplay={sliderSettings.autoplay}
+          autoplaySpeed={sliderSettings.autoplaySpeed}
+          pauseOnHover={sliderSettings.pauseOnHover}
+          arrows={sliderSettings.arrows}
+          nextArrow={sliderSettings.nextArrow}
+          prevArrow={sliderSettings.prevArrow}
+          responsive={sliderSettings.responsive}
+          className='testimony-slider'
         >
-          ‹
-        </button>
-
-        <div className='testimony-carousel' ref={containerRef}>
-          {testimonies.length > 0 ? (
-            testimonies.map((item) => (
-              <article className='testimony-card' key={item.id || item.email}>
+          {testimonies.map((item) => (
+            <div key={item.id || item.email} className='testimony-slide'>
+              <article className='testimony-card'>
                 <header className='testimony-card__header'>
                   <div className='testimony-avatar'>
                     {item.name ? item.name.charAt(0).toUpperCase() : '?'}
@@ -210,7 +153,9 @@ const TestimonyView = () => {
                   </div>
                 </header>
 
-                <div className='testimony-message'>“{item.message}”</div>
+                <div className='testimony-message'>
+                  &ldquo;{item.message}&rdquo;
+                </div>
 
                 <footer className='testimony-card__footer'>
                   <div className='testimony-rating'>
@@ -224,55 +169,9 @@ const TestimonyView = () => {
                   </div>
                 </footer>
               </article>
-            ))
-          ) : (
-            <div className='testimony-empty'>No testimonies yet.</div>
-          )}
-        </div>
-
-        <button
-          type='button'
-          className='carousel-btn carousel-btn--next'
-          onClick={handleNext}
-          aria-label='Next testimony'
-        >
-          ›
-        </button>
-      </div>
-
-      <div
-        className='testimony-dots'
-        role='tablist'
-        aria-label='Testimony pages'
-      >
-        {Array.from(
-          {
-            length: Math.max(1, testimonies.length - (getSlidesPerView() - 1)),
-          },
-          (_, i) => (
-            <button
-              key={i}
-              type='button'
-              className={`dot ${i === activeIndex ? 'active' : ''}`}
-              onClick={() => {
-                const container = containerRef.current
-                if (!container) return
-                const slides = container.querySelectorAll('.testimony-card')
-                const target = slides[i]
-                if (target) {
-                  container.scrollTo({
-                    left: target.offsetLeft,
-                    behavior: 'smooth',
-                  })
-                  setActiveIndex(i)
-                }
-              }}
-              aria-label={`Go to slide ${i + 1}`}
-              role='tab'
-              aria-selected={i === activeIndex}
-            />
-          )
-        )}
+            </div>
+          ))}
+        </Slider>
       </div>
     </section>
   )

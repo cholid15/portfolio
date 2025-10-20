@@ -24,6 +24,8 @@
   max-width: 1000px;
   margin: 0 auto;
   position: relative;
+  /* overflow: hidden; */
+  z-index: 1;
 }
 
 /* Pastikan tombol navigasi selalu di atas konten */
