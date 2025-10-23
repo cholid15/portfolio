@@ -40,38 +40,108 @@ const projects = [
   // projects can be added an removed
   // if there are no projects, Projects section won't show up
   {
+    name: 'Sistem Buku Tamu YBWSA 1',
+    description:
+      'Buku Tamu Digital YBWSA adalah aplikasi berbasis web yang berfungsi untuk mencatat dan mengelola data kunjungan tamu secara digital di lingkungan Yayasan Badan Wakaf Sultan Agung (YBWSA). Aplikasi ini menggantikan proses manual buku tamu menjadi sistem otomatis, efisien, dan mudah diakses melalui browser.',
+    stack: [
+      'Boostrap5',
+      'CodeIgniter 4',
+      'PHP',
+      'JavaScript',
+      'Jquery',
+      'Mysql',
+      'CodeIgniter Shield',
+    ],
+    sourceCode: 'https://github.com',
+    livePreview: 'https://github.com',
+    image: '/projects/bukutamu1.png',
+  },
+
+  {
     name: 'Sistem Buku Tamu YBWSA',
     description:
       'Sistem Buku Tamu YBWSA - Aplikasi web untuk manajemen tamu yang memungkinkan pencatatan, pelacakan, dan pelaporan kunjungan tamu secara efisien, dilengkapi dengan fitur jadwal sholat dan ayat alquran harian.',
-    stack: ['Laravel 11', 'PHP', 'MySQL', 'Laravel Breeze'],
+    stack: [
+      'Boostrap5',
+      'Laravel 11',
+      'PHP',
+      'JavaScript',
+      'Jquery',
+      'MySQL',
+      'Laravel Breeze',
+    ],
     sourceCode: 'https://github.com',
     livePreview: 'https://github.com',
-    image: 'bukutamu_laravel.jpg',
+    image: '/projects/bukutamu2.png',
+  },
+
+  {
+    name: 'Satu Data YBWSA',
+    description:
+      'Sistem Satu Data adalah platform terintegrasi yang mengelola dan menampilkan data dari seluruh unit di bawah naungan Yayasan Badan Sultan Agung. Sistem ini mencakup data dari berbagai lembaga seperti Rumah Sakit Sultan Agung, unit pendidikan (Dikdasmen), dan Universitas Islam Sultan Agung. Informasi yang dihimpun meliputi data pegawai, dosen, guru, mahasiswa, siswa, serta data aset tanah wakaf yang dikelola oleh Lazis Sultan Agung.',
+    stack: [
+      'Boostrap5',
+      'CodeIgniter 4',
+      'PHP',
+      'JavaScript',
+      'Jquery',
+      'Mysql',
+      'CodeIgniter Shield',
+    ],
+    sourceCode: 'https://github.com',
+    livePreview: 'https://github.com',
+    image: '/projects/satudata.png',
   },
   {
-    name: 'Sistem Buku Tamu YBWSA',
+    name: 'SDI(Sumber Daya Insani) YBWSA',
     description:
-      'Sistem Buku Tamu YBWSA - versi awal yang dikembangkan menggunakan CodeIgniter 4',
-    stack: ['CodeIgniter 4', 'PHP', 'Mysql', 'CodeIgniter Shield'],
+      'SDI (Sumber Daya Insani) YBWSA adalah sistem monitoring dan manajemen data kepegawaian di lingkungan Yayasan Badan Wakaf Sultan Agung. Sistem ini digunakan oleh bagian SDI/HRD untuk menambah data pegawai, memperbarui riwayat jabatan, serta mengelola informasi kepegawaian lainnya. Selain itu, sistem ini juga memfasilitasi pengajuan karier oleh unit-unit di bawah yayasan untuk proses kenaikan golongan atau pangkat pegawai.',
+    stack: [
+      'Boostrap5',
+      'CodeIgniter 4',
+      'PHP',
+      'JavaScript',
+      'Jquery',
+      'Mysql',
+      'CodeIgniter Shield',
+    ],
     sourceCode: 'https://github.com',
     livePreview: 'https://github.com',
-    image: 'bukutamu_ci.jpg',
+    image: '/projects/sdi.png',
   },
   {
-    name: 'Project 3',
+    name: 'Si Surat YBWSA',
     description:
-      'Amet asperiores et impedit aliquam consectetur? Voluptates sed a nulla ipsa officia et esse aliquam',
-    stack: ['SASS', 'TypeScript', 'React'],
+      'Si Surat YBWSA adalah sistem surat-menyurat digital yang dikembangkan untuk Sekretariat Yayasan Badan Wakaf Sultan Agung. Sistem ini memfasilitasi proses disposisi dan pelacakan riwayat surat dari seluruh unit di bawah yayasan ke sekretariat, sehingga mempermudah administrasi surat-menyurat. Dilengkapi dengan fitur diskusi berupa chat group, sistem ini memungkinkan pembahasan surat sebelum disposisi, finalisasi, dan tindak lanjut dilakukan, sekaligus mendukung terwujudnya proses kerja yang efisien dan paperless.',
+    stack: [
+      'Boostrap5',
+      'CodeIgniter 4',
+      'PHP',
+      'JavaScript',
+      'Jquery',
+      'Mysql',
+      'CodeIgniter Shield',
+    ],
     sourceCode: 'https://github.com',
     livePreview: 'https://github.com',
+    image: '/projects/sisurat.png',
   },
   {
-    name: 'Project 4',
+    name: 'SPMB (Sistem Penerimaan Murid Baru)',
     description:
-      'Amet asperiores et impedit aliquam consectetur? Voluptates sed a nulla ipsa officia et esse aliquam',
-    stack: ['SASS', 'TypeScript', 'React'],
+      'SPMB (Sistem Penerimaan Murid Baru) adalah sistem yang dikembangkan untuk mempermudah proses penerimaan peserta didik baru di sekolah-sekolah di bawah naungan Dikdasmen (Pendidikan Dasar dan Menengah) Yayasan Badan Wakaf Sultan Agung. Sistem ini mendukung proses pendaftaran secara online maupun offline, sehingga memudahkan sekolah dalam mengelola data calon murid, seleksi, dan administrasi penerimaan secara lebih efisien dan terintegrasi.',
+    stack: [
+      'Boostrap5',
+      'CodeIgniter 4',
+      'PHP',
+      'JavaScript',
+      'Jquery',
+      'Mysql',
+      'CodeIgniter Shield',
+    ],
     sourceCode: 'https://github.com',
     livePreview: 'https://github.com',
+    image: '/projects/spmb.png',
   },
 ]
 

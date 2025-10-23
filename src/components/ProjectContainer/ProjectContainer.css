@@ -6,6 +6,10 @@
   transition: transform 0.2s linear;
 }
 
+.project__name {
+  margin-top: 1rem;
+}
+
 .project:hover {
   transform: translateY(-7px);
 }
