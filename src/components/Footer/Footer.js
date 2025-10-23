@@ -57,7 +57,7 @@ const Footer = () => {
         )}
       </div>
       <p className='footer__text'>
-        © {new Date().getFullYear()} Kholid Fajar Supardi • KholidWorks
+        © {new Date().getFullYear()} Kholid Fajar Supardi • Kholid`sWorks
       </p>
     </footer>
   )

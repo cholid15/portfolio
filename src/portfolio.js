@@ -2,7 +2,7 @@ const header = {
   // all the properties are optional - can be left empty or deleted
   homepage: '#',
   // title: 'Kholid Industries',
-  title: 'Kholid Works',
+  title: 'Kholid`s Works',
 }
 
 const about = {
@@ -19,7 +19,7 @@ const about = {
   social: {
     linkedin: 'https://www.linkedin.com/in/cholidfajar/',
     github: 'https://github.com/cholid15',
-    instagram: 'https://www.instagram.com/khalidfjr_/',
+    instagram: 'https://www.instagram.com/kholidfjr_/',
     wa: 'https://wa.me/6282353361496',
   },
   // Tambahkan stats baru di sini
@@ -40,7 +40,7 @@ const projects = [
   // projects can be added an removed
   // if there are no projects, Projects section won't show up
   {
-    name: 'Sistem Buku Tamu YBWSA 1',
+    name: 'Sistem Buku Tamu YBWSA V.1',
     description:
       'Buku Tamu Digital YBWSA adalah aplikasi berbasis web yang berfungsi untuk mencatat dan mengelola data kunjungan tamu secara digital di lingkungan Yayasan Badan Wakaf Sultan Agung (YBWSA). Aplikasi ini menggantikan proses manual buku tamu menjadi sistem otomatis, efisien, dan mudah diakses melalui browser.',
     stack: [
@@ -58,7 +58,7 @@ const projects = [
   },
 
   {
-    name: 'Sistem Buku Tamu YBWSA',
+    name: 'Sistem Buku Tamu YBWSA V.2',
     description:
       'Sistem Buku Tamu YBWSA - Aplikasi web untuk manajemen tamu yang memungkinkan pencatatan, pelacakan, dan pelaporan kunjungan tamu secara efisien, dilengkapi dengan fitur jadwal sholat dan ayat alquran harian.',
     stack: [

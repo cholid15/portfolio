@@ -6,18 +6,10 @@
 
 .section__title {
   font-size: 2.2rem;
-  color: #ffffff;
+  color: var(--clr-fg-alt);
   margin-bottom: 2rem;
   font-weight: 700;
 }
-
-/* .projects__count {
-  font-size: 1rem;
-  color: #00bfff;
-  margin-left: 0.5rem;
-  font-weight: 500;
-  opacity: 0.9;
-} */
 
 /* === Carousel Style === */
 .projects__carousel {
@@ -36,10 +28,10 @@
   height: 40px;
 }
 
-/* Warna & ukuran panah */
+/* Warna & ukuran panah — mengikuti mode (light/dark) */
 .slick-prev:before,
 .slick-next:before {
-  color: #fff;
+  color: var(--clr-fg-alt);
   font-size: 28px;
   opacity: 0.9;
   transition: all 0.3s ease;
@@ -47,7 +39,7 @@
 
 .slick-prev:hover:before,
 .slick-next:hover:before {
-  color: #00bfff;
+  color: var(--clr-primary);
   transform: scale(1.2);
 }
 
@@ -69,7 +61,7 @@
 }
 
 .slick-dots li.slick-active button:before {
-  color: #00bfff;
+  color: var(--clr-primary);
 }
 
 /* === Per Slide === */
@@ -109,13 +101,13 @@
 /* === Text content === */
 .project__name {
   font-size: 1.8rem;
-  color: #fff;
+  color: var(--clr-fg-alt);
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
 .project__description {
-  color: #ccc;
+  color: var(--clr-fg);
   font-size: 1rem;
   line-height: 1.6;
   margin-bottom: 1rem;
@@ -127,7 +119,25 @@
   gap: 0.5rem;
 }
 
-.project__stack-item {
+/* .project__stack-item {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--clr-fg-alt);
+  padding: 0.4rem 0.8rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+} */
+
+/* Saat light mode — agar terlihat jelas */
+.light .project__stack-item {
+  background: rgba(0, 0, 0, 0.1);
+  color: #222;
+  padding: 0.4rem 0.8rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+}
+
+/* Saat dark mode — tetap lembut tapi kontras */
+.dark .project__stack-item {
   background: rgba(255, 255, 255, 0.15);
   color: #fff;
   padding: 0.4rem 0.8rem;
