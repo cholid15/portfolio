@@ -1,0 +1,20 @@
+🎯 <b>NEW CONTACT MESSAGE</b>
+━━━━━━━━━━━━━━━━━━━━━━━━
+
+👤 <b>Contact Information</b>
+├ Name: <code>{{FIRSTNAME}} {{LASTNAME}}</code>
+├ Email: <code>{{EMAIL}}</code>
+└ Phone: <code>{{PHONE}}</code>
+
+🛠 <b>Service Requested</b>
+└ <i>{{SERVICE}}</i>
+
+📅 <b>Received</b>
+└ {{TIME}}
+
+💬 <b>Message</b>
+┌─────────────────────
+│ <i>{{MESSAGE}}</i>
+└─────────────────────
+
+✅ <b>Status:</b> Saved to Database

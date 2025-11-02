@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import EmailIcon from '@material-ui/icons/Email'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import PhoneIcon from '@material-ui/icons/Phone'
@@ -16,13 +16,22 @@ const Contact = () => {
     message: '',
   })
 
+  // REF untuk memastikan komponen masih mounted
+  const isMountedRef = useRef(true)
+  useEffect(
+    () => () => {
+      isMountedRef.current = false
+    },
+    []
+  )
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    handleSubmitLogic(formData, setFormData, validateForm)
+    handleSubmitLogic(formData, setFormData, validateForm, isMountedRef)
   }
 
   return (
@@ -87,8 +96,6 @@ const Contact = () => {
                 <option value=''>Select a service</option>
                 <option>Website Development</option>
                 <option>API Integration</option>
-                {/* <option>IoT Solutions</option>
-                <option>DevOps Services</option> */}
               </select>
             </div>
 

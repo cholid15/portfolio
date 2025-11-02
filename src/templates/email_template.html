@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f7fa;
+      }
+      .container {
+        max-width: 600px;
+        margin: 40px auto;
+        background: #ffffff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+      .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 600;
+      }
+      .header p {
+        margin: 10px 0 0;
+        opacity: 0.9;
+        font-size: 14px;
+      }
+      .content {
+        padding: 35px;
+      }
+      .info-card {
+        background: #f8f9fc;
+        border-left: 4px solid #667eea;
+        padding: 20px;
+        margin-bottom: 25px;
+        border-radius: 8px;
+      }
+      .info-card h3 {
+        margin: 0 0 15px;
+        color: #333;
+        font-size: 16px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+      }
+      .info-card h3::before {
+        content: '●';
+        color: #667eea;
+        margin-right: 10px;
+        font-size: 20px;
+      }
+      .info-row {
+        display: flex;
+        padding: 10px 0;
+        border-bottom: 1px solid #e8eaf0;
+      }
+      .info-row:last-child {
+        border-bottom: none;
+      }
+      .info-label {
+        font-weight: 600;
+        color: #666;
+        width: 120px;
+        font-size: 14px;
+      }
+      .info-value {
+        color: #333;
+        flex: 1;
+        font-size: 14px;
+      }
+      .message-box {
+        background: #ffffff;
+        border: 2px solid #e8eaf0;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+      }
+      .message-box h3 {
+        margin: 0 0 15px;
+        color: #333;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .message-text {
+        color: #555;
+        line-height: 1.6;
+        font-size: 14px;
+        white-space: pre-wrap;
+      }
+      .footer {
+        background: #f8f9fc;
+        padding: 25px;
+        text-align: center;
+        color: #666;
+        font-size: 13px;
+        border-top: 1px solid #e8eaf0;
+      }
+      .badge {
+        display: inline-block;
+        background: #667eea;
+        color: white;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>📬 New Contact Message</h1>
+        <p>You have received a new inquiry from your portfolio</p>
+        <span class="badge">{{TIME}}</span>
+      </div>
+
+      <div class="content">
+        <div class="info-card">
+          <h3>Contact Information</h3>
+          <div class="info-row">
+            <div class="info-label">👤 Full Name</div>
+            <div class="info-value">
+              <strong>{{FIRSTNAME}} {{LASTNAME}}</strong>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">📧 Email</div>
+            <div class="info-value">
+              <a
+                href="mailto:{{EMAIL}}"
+                style="color: #667eea; text-decoration: none"
+                >{{EMAIL}}</a
+              >
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">📱 Phone</div>
+            <div class="info-value">{{PHONE}}</div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h3>Service Details</h3>
+          <div class="info-row">
+            <div class="info-label">🛠️ Service</div>
+            <div class="info-value"><strong>{{SERVICE}}</strong></div>
+          </div>
+        </div>
+
+        <div class="message-box">
+          <h3>💬 Message Content</h3>
+          <div class="message-text">{{MESSAGE}}</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p><strong>✅ This message has been saved to your database</strong></p>
+        <p style="margin-top: 15px; color: #999; font-size: 12px">
+          This is an automated notification from your Portfolio Contact Form
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

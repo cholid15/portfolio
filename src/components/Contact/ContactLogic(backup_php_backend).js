@@ -46,27 +46,22 @@ export const handleSubmitLogic = async (formData, setFormData, validateFn) => {
       didOpen: () => Swal.showLoading(),
     })
 
+    // 📨 Kirim ke backend PHP
+    // Gunakan IP atau domain backend PHP (bukan "localhost" dari React)
     const backendURL =
-      'https://script.google.com/macros/s/AKfycbwZyoj5YoKV3KwLi2b0IpjUleO4XfFxjUBx6ezZZw6C71KyVfNww61sUf05seGDQVvtWw/exec'
+      'http://localhost/portfolio/backend_php/contact_submit.php'
 
-    // ✅ PERBAIKAN: Ubah jadi URLSearchParams untuk menghindari CORS preflight
-    const params = new URLSearchParams()
-    params.append('firstname', formData.firstname)
-    params.append('lastname', formData.lastname)
-    params.append('email', formData.email)
-    params.append('phone', formData.phone || '')
-    params.append('service', formData.service)
-    params.append('message', formData.message)
-
-    const res = await axios.post(backendURL, params, {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      withCredentials: false,
-      timeout: 15000,
+    const response = await axios.post(backendURL, formData, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      withCredentials: false, // pastikan tidak kirim cookie cross-origin
+      timeout: 10000,
     })
 
-    Swal.close()
-
-    if (res.data && res.data.status === 'success') {
+    if (response?.data?.status === 'success') {
+      Swal.close()
       Swal.fire({
         title: 'Success!',
         text: 'Your message has been sent successfully!',
@@ -85,15 +80,27 @@ export const handleSubmitLogic = async (formData, setFormData, validateFn) => {
         message: '',
       })
     } else {
-      throw new Error('Server did not respond with success.')
+      throw new Error(response?.data?.message || 'Unknown server error')
     }
   } catch (err) {
     Swal.close()
-    console.error('❌ Backend error:', err)
-    Swal.fire({
-      title: 'Error!',
-      text: 'Failed to send message. Please try again later.',
-      icon: 'error',
-    })
+
+    // Tampilkan pesan error yang lebih jelas di console
+    console.error('❌ PHP backend error:', err)
+
+    // Jika error karena CORS, tampilkan penjelasan
+    if (err.message.includes('Network Error')) {
+      Swal.fire({
+        title: 'Network Error!',
+        text: 'Failed to reach the backend. Please ensure your PHP server is running and CORS is enabled.',
+        icon: 'error',
+      })
+    } else {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Failed to send message. Please try again later.',
+        icon: 'error',
+      })
+    }
   }
 }
